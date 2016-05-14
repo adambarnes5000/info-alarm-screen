@@ -4,7 +4,10 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Informer</title>
-    <link href="../css/bootstrap.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link href="../css/styles.css" rel="stylesheet">
     <script src="../js/angular.min.js"></script>
     <script src="../js/moment.min.js"></script>
@@ -24,9 +27,9 @@
         <div class="container">
             <div>
                 <div class="col-sm-4"  ng-controller="newsController">
-                    <h3 class="text-center">BBC News</h3>
-                    <p ng-repeat="x in news">
-                        {{ x.title }}
+                    <h3 class="text-center" >BBC News</h3>
+                    <p ng-repeat="x in news" >
+                        <span class="pop" data-toggle="popover" data-content="{{x.detail}}" rel="popover" data-placement="right"  data-trigger="hover">{{ x.title }}</span>
                     </p>
                 </div>
 
@@ -37,22 +40,23 @@
                     </p>
                 </div>
 
-                <div class="col-sm-4"  ng-controller="weatherController">
+                <div class="col-sm-4" ng-controller="weatherController" >
                     <h3 class="text-center">Weather</h3>
-                    <img src="{{weather.icon}}" />
-                    <p>{{weather.description}}</p>
-                    <p>Current Temp {{weather.temp}}&deg;</p>
-                    <p>Min {{weather.tempMin}}&deg&nbsp;
-                        Max {{weather.tempMax}}&deg;</p>
-                    <p>Sun Rise {{weather.sunRise}}</p>
-                    <p>Sun Set {{weather.sunSet}}</p>
+                    <div>
+                        <img src="{{weather.current.icon_url}}" />
+                        {{weather.current.desc}}
+                    </div>
+                    <p>Current Temp {{weather.current.temp | number:0 }}&deg;</p>
+                    <p>Sun Rise {{weather.sunrise}} Set {{weather.sunset}}</p>
+                    <p>{{weather.forecast_day.title}} : {{weather.forecast_day.desc}}</p>
+                    <p>{{weather.forecast_night.title}} : {{weather.forecast_night.desc}}</p>
                 </div>
 
             </div>
 
         </div>
         <div class="col-sm-12 text-center" ng-controller="alarmController">
-            <h3>Next Alarm {{nextAlarm}}</h3>
+            <h4 onclick='load_popovers();'>Next Alarm {{nextAlarm}}</h4>
         </div>
     </section>
 
@@ -60,6 +64,10 @@
 </div>
 
 
-<!-- script references -->
+<script>
+    function load_popovers(){
+        $('[data-toggle="popover"]').popover({container: 'body'});
+    }
+</script>
 </body>
 </html>

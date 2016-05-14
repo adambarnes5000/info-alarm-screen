@@ -1,9 +1,11 @@
 
+var back_end = 'http://dev.pi.com:5000/';
+
 var app = angular.module('myApp', []);
 
 app.controller('newsController', function($scope, $http, $interval) {
     function load_news(){
-        $http.get("http://192.168.192.47:5000/news").then(function (response) {
+        $http.get(back_end+"news").then(function (response) {
                 $scope.news = response.data;
             });
     }
@@ -15,7 +17,7 @@ app.controller('newsController', function($scope, $http, $interval) {
 
 app.controller('busesController', function($scope, $http, $interval) {
     function load_buses(){
-        $http.get("http://192.168.192.47:5000/buses").then(function (response) {
+        $http.get(back_end+"buses").then(function (response) {
                 $scope.buses = response.data;
             });
     }
@@ -27,7 +29,7 @@ app.controller('busesController', function($scope, $http, $interval) {
 
 app.controller('weatherController', function($scope, $http, $interval) {
     function load_weather(){
-        $http.get("http://192.168.192.47:5000/weather").then(function (response) {
+        $http.get(back_end+"weather").then(function (response) {
                 $scope.weather = response.data;
             });
     }
@@ -46,7 +48,7 @@ app.controller('timeController', function($scope, $http, $interval) {
         load_time();
     },1000);
     $scope.quit_console = function(){
-        $http.get("http://192.168.192.47:5000/killchromium").then(function (response) {
+        $http.get(back_end+"killchromium").then(function (response) {
                         $scope.result = response.data;
                     });
     }
@@ -54,7 +56,7 @@ app.controller('timeController', function($scope, $http, $interval) {
 
 app.controller('alarmController', function($scope, $http, $interval) {
     function load_alarm(){
-        $http.get("http://192.168.192.47:5000/alarm").then(function (response) {
+        $http.get(back_end+"alarm").then(function (response) {
                 $scope.nextAlarm = response.data;
             });
     }

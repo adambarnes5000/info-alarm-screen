@@ -10,3 +10,7 @@ body {
 .h3 {
     text-shadow: 1px 1px 0 #444;
 }
+
+.popover{
+    max-width: 75%; /* Max Width of the popover (depending on the container!) */
+}
