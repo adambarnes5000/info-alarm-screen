@@ -1,0 +1,12 @@
+body {
+    background-color: #000;
+}
+
+.container {
+    background: #000;
+    color: #585;
+}
+
+.h3 {
+    text-shadow: 1px 1px 0 #444;
+}

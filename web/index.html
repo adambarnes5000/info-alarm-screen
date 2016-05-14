@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Informer</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/moment.min.js"></script>
+    <script src="../js/app.js"></script>
+</head>
+<body>
+
+<div class="container" ng-app="myApp" >
+
+
+    <section>
+        <!--Bootstrap 3 Scaffolding-->
+        <div class="page-header text-center" ng-controller="timeController" ng-click="quit_console()">
+            <h1>{{currentTime}}</h1>
+        </div>
+
+        <div class="container">
+            <div>
+                <div class="col-sm-4"  ng-controller="newsController">
+                    <h3 class="text-center">BBC News</h3>
+                    <p ng-repeat="x in news">
+                        {{ x.title }}
+                    </p>
+                </div>
+
+                <div class="col-sm-4"  ng-controller="busesController">
+                    <h3 class="text-center">Buses</h3>
+                    <p ng-repeat="x in buses">
+                        {{ x.time }}&nbsp;{{ x.route }}&nbsp;{{ x.destination }}
+                    </p>
+                </div>
+
+                <div class="col-sm-4"  ng-controller="weatherController">
+                    <h3 class="text-center">Weather</h3>
+                    <img src="{{weather.icon}}" />
+                    <p>{{weather.description}}</p>
+                    <p>Current Temp {{weather.temp}}&deg;</p>
+                    <p>Min {{weather.tempMin}}&deg&nbsp;
+                        Max {{weather.tempMax}}&deg;</p>
+                    <p>Sun Rise {{weather.sunRise}}</p>
+                    <p>Sun Set {{weather.sunSet}}</p>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-sm-12 text-center" ng-controller="alarmController">
+            <h3>Next Alarm {{nextAlarm}}</h3>
+        </div>
+    </section>
+
+
+</div>
+
+
+<!-- script references -->
+</body>
+</html>
