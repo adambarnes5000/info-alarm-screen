@@ -1,7 +1,7 @@
 
 var back_end = 'http://dev.pi.com:5000/';
 
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['jkuri.timepicker']);
 
 app.controller('newsController', function($scope, $http, $interval) {
     function load_news(){
@@ -54,14 +54,35 @@ app.controller('timeController', function($scope, $http, $interval) {
     }
 });
 
-app.controller('alarmController', function($scope, $http, $interval) {
-    function load_alarm(){
-        $http.get(back_end+"alarm").then(function (response) {
+app.controller('alarmController', function($scope, $http, $interval, $window) {
+    function load_next_alarm(){
+        $http.get(back_end+"nextalarm").then(function (response) {
                 $scope.nextAlarm = response.data;
             });
     }
-    load_alarm();
+    $http.get(back_end+"alarms").then(function (response) {
+                $scope.alarms = response.data;
+            });
+    load_next_alarm();
     $interval(function(){
-        load_alarm();
+        load_next_alarm();
     },60000);
+    $scope.delete = function (idx){
+        $scope.alarms.splice(idx, 1);
+    }
+    $scope.add_new = function (){
+        $scope.alarms.push(['07:30','WORKDAY'])
+    }
+    $scope.save = function (){
+        $http.post(back_end+"alarms",$scope.alarms).then(function (response) {
+                $window.location.href = 'index.html';
+            });
+    }
+    $scope.cancel = function (){
+        $window.location.href = 'index.html';
+    }
+    $scope.edit_alarms = function (){
+        $window.location.href = 'alarms.html';
+    }
+    $scope.day_types={'Every Day':'EVERYDAY','Work Day':'WORKDAY','Weekend':'WEEKEND'}
 });

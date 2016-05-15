@@ -14,3 +14,7 @@ body {
 .popover{
     max-width: 75%; /* Max Width of the popover (depending on the container!) */
 }
+
+.daysSelect {
+    height: 35px;
+}

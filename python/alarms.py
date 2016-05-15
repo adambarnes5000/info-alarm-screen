@@ -10,19 +10,15 @@ files = glob.glob('/home/pi/Alarms/*.mp3')
 
 # TODO Bank Holidays
 
-alarms = []
 
-
-def load_alarms():
-    global alarms
-    alarms = json.load(open('/home/pi/Alarms/alarms.json'))
-
-
-load_alarms()
+def get_alarms():
+    with open('/home/pi/Alarms/alarms.json') as f:
+        alarms = json.load(f)
+    return alarms
 
 
 def main():
-    for alarm in alarms:
+    for alarm in get_alarms():
         if time_valid(alarm[0]) and day_valid(alarm[1]):
             play_file(random.choice(files))
         else:
@@ -30,7 +26,7 @@ def main():
 
 
 def get_next_alarm():
-    load_alarms()
+    alarms = get_alarms()
     work_day_alarms = filter(lambda x: x[1] != 'WEEKEND', alarms)
     weekend_alarms = filter(lambda x: x[1] != 'WORKDAY', alarms)
     todays_alarms = work_day_alarms if is_work_day() else weekend_alarms
@@ -41,6 +37,12 @@ def get_next_alarm():
     if len(tomorrows_alarms) > 0:
         return 'Tomorrow %s' % get_earliest_alarm_time(tomorrows_alarms)
     return 'Monday %s' % get_earliest_alarm_time(alarms)
+
+
+def save(alarms):
+    print alarms
+    with open('/home/pi/Alarms/alarms.json', 'w') as outfile:
+        json.dump(alarms, outfile)
 
 
 def get_earliest_alarm_time(alarms_list):

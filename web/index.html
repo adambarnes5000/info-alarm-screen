@@ -27,7 +27,7 @@
         <div class="container">
             <div>
                 <div class="col-sm-4"  ng-controller="newsController">
-                    <h3 class="text-center" >BBC News</h3>
+                    <h3 class="text-center" onclick='load_popovers();'>BBC News</h3>
                     <p ng-repeat="x in news" >
                         <span class="pop" data-toggle="popover" data-content="{{x.detail}}" rel="popover" data-placement="right"  data-trigger="hover">{{ x.title }}</span>
                     </p>
@@ -56,7 +56,7 @@
 
         </div>
         <div class="col-sm-12 text-center" ng-controller="alarmController">
-            <h4 onclick='load_popovers();'>Next Alarm {{nextAlarm}}</h4>
+            <h4 ng-click='edit_alarms();'>Next Alarm {{nextAlarm}}</h4>
         </div>
     </section>
 
@@ -64,6 +64,8 @@
 </div>
 
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+    <script type="text/javascript" src="../js/ngTimepicker.min.js"></script>
 <script>
     function load_popovers(){
         $('[data-toggle="popover"]').popover({container: 'body'});
