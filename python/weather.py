@@ -1,12 +1,7 @@
 import urllib2
 import datetime
 
-
-WEATHER_MAP={
-    'current':'',
-
-}
-
+SHORT_DESC_LEN = 60
 
 def get_icon_url(icon):
     return "http://openweathermap.org/img/w/%s.png" % icon
@@ -48,8 +43,21 @@ def get_forecast(data):
     return {
         'icon_url': xpath_get(data,'icon_url'),
         'desc': xpath_get(data, 'fcttext_metric'),
+        'desc_short': get_short_desc(xpath_get(data, 'fcttext_metric')),
         'title': xpath_get(data, 'title'),
     }
+
+
+def get_short_desc(desc):
+    sentences = desc.split('. ')
+    short_desc = ''
+    if len(sentences[0]) > SHORT_DESC_LEN:
+        return desc[:SHORT_DESC_LEN]+'...'
+    for sentence in sentences:
+        if (len(short_desc + sentence)) > SHORT_DESC_LEN:
+            return short_desc[:-1] + '*'
+        short_desc = '%s%s. ' % (short_desc, sentence)
+    return desc
 
 
 def xpath_get(mydict, path):
@@ -68,4 +76,4 @@ def xpath_get(mydict, path):
     return elem
 
 if __name__ == "__main__":
-    print get_weather()
+    print get_short_desc("Showers early, then partly cloudy overnight. Low 6C. Winds WSW at 15 to 25 km/h. Chance of rain 70%.")

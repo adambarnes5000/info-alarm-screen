@@ -50,12 +50,12 @@
                     <p>Sun Rise {{weather.sunrise}} Set {{weather.sunset}}</p>
                     <p>
                         <span class="pop" data-toggle="popover" data-content="{{weather.forecast_day.desc}}" rel="popover" data-placement="left"  data-trigger="hover">
-                            {{weather.forecast_day.title}} : {{weather.forecast_day.desc | limitTo : 140}}
+                            {{weather.forecast_day.title}} : {{weather.forecast_day.desc_short}}
                         </span>
                     </p>
                     <p>
                         <span class="pop" data-toggle="popover" data-content="{{weather.forecast_night.desc}}" rel="popover" data-placement="left"  data-trigger="hover">
-                            {{weather.forecast_night.title}} : {{weather.forecast_night.desc | limitTo : 100}}
+                            {{weather.forecast_night.title}} : {{weather.forecast_night.desc_short}}
                         </span>
                     </p>
                 </div>

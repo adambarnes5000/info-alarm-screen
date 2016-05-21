@@ -42,7 +42,7 @@ app.controller('weatherController', function($scope, $http, $interval,$timeout) 
     },1800000);
 });
 
-app.controller('timeController', function($scope, $http, $interval) {
+app.controller('timeController', function($scope, $http, $interval,$timeout) {
     function load_time(){
         $scope.currentTime=moment().format('dddd MMMM Do YYYY, HH:mm')
     }
