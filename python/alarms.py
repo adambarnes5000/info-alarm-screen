@@ -22,7 +22,7 @@ def main():
         if time_valid(alarm[0]) and day_valid(alarm[1]):
             play_file(random.choice(files))
         else:
-            print 'Ignoring alarm %s %s' % alarm
+            print 'Ignoring alarm %s ' % alarm
 
 
 def get_next_alarm():
@@ -77,4 +77,4 @@ def play_file(music_file):
 
 
 if __name__ == "__main__":
-    print get_next_alarm()
+    main()

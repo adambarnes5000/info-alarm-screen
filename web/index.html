@@ -27,7 +27,7 @@
         <div class="container">
             <div>
                 <div class="col-sm-4"  ng-controller="newsController">
-                    <h3 class="text-center" onclick='load_popovers();'>BBC News</h3>
+                    <h3 class="text-center" >BBC News</h3>
                     <p ng-repeat="x in news" >
                         <span class="pop" data-toggle="popover" data-content="{{x.detail}}" rel="popover" data-placement="right"  data-trigger="hover">{{ x.title }}</span>
                     </p>
@@ -48,8 +48,16 @@
                     </div>
                     <p>Current Temp {{weather.current.temp | number:0 }}&deg;</p>
                     <p>Sun Rise {{weather.sunrise}} Set {{weather.sunset}}</p>
-                    <p>{{weather.forecast_day.title}} : {{weather.forecast_day.desc}}</p>
-                    <p>{{weather.forecast_night.title}} : {{weather.forecast_night.desc}}</p>
+                    <p>
+                        <span class="pop" data-toggle="popover" data-content="{{weather.forecast_day.desc}}" rel="popover" data-placement="left"  data-trigger="hover">
+                            {{weather.forecast_day.title}} : {{weather.forecast_day.desc | limitTo : 140}}
+                        </span>
+                    </p>
+                    <p>
+                        <span class="pop" data-toggle="popover" data-content="{{weather.forecast_night.desc}}" rel="popover" data-placement="left"  data-trigger="hover">
+                            {{weather.forecast_night.title}} : {{weather.forecast_night.desc | limitTo : 100}}
+                        </span>
+                    </p>
                 </div>
 
             </div>

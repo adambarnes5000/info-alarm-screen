@@ -1,12 +1,15 @@
 
-var back_end = 'http://dev.pi.com:5000/';
+var back_end = 'http://alarm.pi.com:5000/';
 
 var app = angular.module('myApp', ['jkuri.timepicker']);
 
-app.controller('newsController', function($scope, $http, $interval) {
+app.controller('newsController', function($scope, $http, $interval,$timeout) {
     function load_news(){
         $http.get(back_end+"news").then(function (response) {
                 $scope.news = response.data;
+                $timeout(function(){
+                    load_popovers();
+                },500)
             });
     }
     load_news();
@@ -27,7 +30,7 @@ app.controller('busesController', function($scope, $http, $interval) {
     },30000);
 });
 
-app.controller('weatherController', function($scope, $http, $interval) {
+app.controller('weatherController', function($scope, $http, $interval,$timeout) {
     function load_weather(){
         $http.get(back_end+"weather").then(function (response) {
                 $scope.weather = response.data;
@@ -58,6 +61,9 @@ app.controller('alarmController', function($scope, $http, $interval, $window) {
     function load_next_alarm(){
         $http.get(back_end+"nextalarm").then(function (response) {
                 $scope.nextAlarm = response.data;
+                $timeout(function(){
+                    load_popovers();
+                },500)
             });
     }
     $http.get(back_end+"alarms").then(function (response) {
