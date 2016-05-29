@@ -2,7 +2,7 @@ import urllib2
 
 
 def get_buses():
-    return get_buses_for_stop(781, '39A') + get_buses_for_stop(753, '18')
+    return get_buses_for_stop(753, '39A') + get_buses_for_stop(781, '18')
 
 
 def get_buses_for_stop(stop_id, route):

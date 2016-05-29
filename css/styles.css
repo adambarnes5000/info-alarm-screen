@@ -1,5 +1,6 @@
 body {
     background-color: #000;
+    font-family: 'Oswald', sans-serif;
 }
 
 .container {
@@ -11,13 +12,15 @@ body {
     text-shadow: 1px 1px 0 #444;
 }
 
-.popover{
-    }
+h3, h4 {
+    font-family: 'Droid', sans-serif;
+}
 
 .daysSelect {
     height: 35px;
 }
 
 .no-top-margin {
-    margin: 0px 0 20px;
+    margin: 0px 0 5px;
+    padding-bottom: 5px;
 }

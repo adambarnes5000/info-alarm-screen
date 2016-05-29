@@ -58,6 +58,17 @@ def save_alarms():
     alarms.save(eval(request.data))
     return "Done"
 
+@app.route("/holidays", methods=['GET'])
+@cross_origin()
+def get_holidays():
+    return str(json.dumps(alarms.get_holidays()))
+
+@app.route("/holidays", methods=['POST'])
+@cross_origin()
+def save_holidays():
+    alarms.save_holidays(eval(request.data))
+    return "Done"
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)
 
